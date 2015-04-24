@@ -1,0 +1,35 @@
+<!--
+FORECAST TEMPLATE PAGE
+
+Controller association is being done in app.js/.config so it doesn't have to be declared here.
+Javascript functions are being calculated in app.js/forecastController
+-->
+
+
+<div class="container">
+    <h2>Forecast</h2>
+    <h3>City: {{ city }}</h3>
+    <hr/>
+    Days:  <a href="#/forecast/2">2</a> |
+           <a href="#/forecast/5">5</a> |
+           <a href="#/forecast/7">7</a>
+    <hr/>
+</div>
+
+
+<div ng-repeat="weather in weatherResult.list">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Date: {{ convertToDate(weather.dt) | date: "MMM. d, y" }}</h3> <!-- interpolation with filter -->
+                </div>
+                <div class="panel-body">
+                    Daytime Temperature: {{ convertToFahrenheit(weather.temp.day) }}
+                    <br>
+                    Night Temperature: {{ convertToFahrenheit(weather.temp.night) }}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
