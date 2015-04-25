@@ -27,12 +27,16 @@ weatherApp.service("cityService", function(){
         //"San Diego, CA"
         //"New York, NY";
     
+    this.wthrDay = function(data){
+        console.log("wthrDay: ",data);
+    }
+    
     this.fahrenheitConversion = function(degK){
         return Math.round((1.8 * (degK - 273) + 32));
     };
     
     //Returns weather day status
-    this.getDayWeather = function(dW){
+    this.getDayWeather = function(wR){
         /*return ([
             {
                 sky: "Sunny",
@@ -47,8 +51,12 @@ weatherApp.service("cityService", function(){
                 img: "images/rainy.jpg"
             }
         ])*/
+        //alert(wR);
+        console.log("wR: ",wR);
+        return "Hello Day Weather";
         
     };
+    
 });
 
 // CONTROLLERS
@@ -61,7 +69,7 @@ weatherApp.controller("homeController", [ '$scope', 'cityService', function($sco
 }]);
 
 weatherApp.controller("forecastController", [ '$scope', '$resource', '$routeParams', 'cityService', function($scope, $resource, $routeParams, cityService){
-    $scope.city = cityService.city,
+    $scope.city = cityService.city;
         
     $scope.days = $routeParams.days || 2;
     
@@ -70,10 +78,10 @@ weatherApp.controller("forecastController", [ '$scope', '$resource', '$routePara
         
     /*$resource("http://api.openweathermap.org/data/2.5/weather?", {
         callback: "JSON_CALLBACK" }, { get: { method: "JSONP" }});*/
-   
     
     $scope.weatherResult = $scope.weatherAPI.get({ q: $scope.city, cnt: $scope.days});
-    console.log($scope.weatherResult);
+    console.info("$scope.weatherResult: ",$scope.weatherResult);
+    //console.log($scope.weatherResult);
     
     /*$scope.convertToFahrenheit = function(degK){
         return Math.round((1.8 * (degK - 273) + 32));
@@ -84,13 +92,23 @@ weatherApp.controller("forecastController", [ '$scope', '$resource', '$routePara
         return new Date(dt * 1000);
     };
     
+    //$scope.wR2 = $scope.weatherAPI.get({ });
+    
     $scope.dayWeather = {};
     try {
-        $scope.dayWeather = cityService.getDayWeather();
-        console.log($scope.dayWeather);
+        $scope.dayWeather = cityService.getDayWeather($scope.someParam);
+        console.log("test: ",$scope.dayWeather);
     } catch (error) {
         console.error("Eror: "+error);
-    }
+    };
+    
+    $scope.wthrDayX = $scope.weatherAPI.get({ list: $scope.weather});
+    $scope.wthrDay = cityService.wthrDay($scope.wthrDayX);
+    
+    
+    
+    //$scope.dayWeather2 = cityService.getDayWeather($scope.weatherAPI);
+        //console.log($scope.dayWeather);
     
     $scope.backgroundImage = function(){
         //code goes here 

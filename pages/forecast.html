@@ -29,13 +29,17 @@ Javascript functions are being calculated in app.js/forecastController
                     <br>
                     Night Temperature: {{ convertToFahrenheit(w.temp.eve) }}
                     <br>
-                    Weather: {{ w.weather }}
+                    Day temp before conversion: {{ w.temp.day }} <br>
+                    Weather: {{ w.weather }} <br>
+                    Weather Pressure: {{ w.pressure }} <br>
+                    <!--Weather : {{ w.data.weather[0].main }} <br>-->
+                    WeatherDay2: {{ dayWeather }}
                     <br>
-                    <div ng-repeat="wD in weatherResult.list.weather">
+                    <!--<div ng-repeat="wD in weatherResult.list.weather">
                         WeatherY: {{ wD }}
-                    </div>
+                    </div>-->
                     <br>
-                    WeatherX: {{ w.dt }}
+                    Unfiltered Date: {{ w.dt }}
                 </div>
                 
             </div>
