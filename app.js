@@ -102,8 +102,14 @@ weatherApp.controller("forecastController", [ '$scope', '$resource', '$routePara
         console.error("Eror: "+error);
     };
     
-    $scope.wthrDayX = $scope.weatherAPI.get({ list: $scope.weather});
-    $scope.wthrDay = cityService.wthrDay($scope.wthrDayX);
+    /*$scope.main = {};
+    jsonFactory.getWeatherStuff()
+        .then(function (response){
+            $scope.main = response.data.weather(main)[0];
+            console.log("main: ",$scope.main);
+    }, function(error){
+        console.error(error);
+    });*/
     
     
     
